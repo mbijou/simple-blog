@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'content:new' pk=post_instance.pk %}" enctype="multipart/form-data">{% csrf_token %}
+    {{ content_form.as_p }}
+    {{ image_form.as_p }}
+    <button type="submit" class="btn btn-primary">Neuen Inhalt hinzufügen</button>
+</form>

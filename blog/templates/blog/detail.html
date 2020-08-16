@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block page_header_heading %}
+    {% include 'blog/detail/post_heading.html' %}
+{% endblock %}
+
+
+{% block page_header_background %}
+    {% if post.post_image %}
+        {{ post.post_image.url }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+      <!-- Post Content -->
+      <article>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              {% for content in post.content_set.all %}
+                  {% include 'blog/detail/content_block.html' with content=content%}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </article>
+{% endblock %}

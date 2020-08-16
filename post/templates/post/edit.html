@@ -1,0 +1,67 @@
+{% extends 'blog/base.html' %}
+
+
+
+{% block page_header_background %}
+    {% if object.post_image %}
+        {{ object.post_image.url }}
+    {% endif %}
+{% endblock %}
+
+
+
+
+{% block page_header_heading %}
+    {% if user.is_authenticated %}
+      <div class="post-heading">
+        {% include 'post/edit/form.html' %}
+      </div>
+    {% else %}
+        {% include 'blog/detail/post_heading.html' with post=object %}
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+      <!-- Post Content -->
+      <article>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                {% for content in object.content_set.all %}
+                    {% include "blog/detail/content_block.html" with edit=True %}
+                {% endfor %}
+
+                {% if user.is_authenticated %}
+                    <hr/>
+
+                    <p>Neuen Inhalt hinzufügen</p>
+
+                    {% include "content/new/form.html" with post_instance=object %}
+
+
+                    <div class="text-right">
+                        <form method="POST" action="{% url 'post:delete' pk=object.pk %}">{% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Beitrag löschen</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <script>
+        // scroll to last edited content
+        let last_url = "{{ request.GET.last }}";
+        let links = document.getElementsByTagName("a");
+        for(let i=0;i<links.length; i++){
+            let link = links[i];
+            if(link.pathname === last_url){
+                link.parentElement.scrollIntoView();
+            }
+        }
+      </script>
+
+{% endblock %}
+

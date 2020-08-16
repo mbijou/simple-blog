@@ -1,0 +1,5 @@
+{% if edit is True %}
+    {% if user.is_authenticated %}
+        <a style="text-decoration: none;" href="{% url 'content:edit' pk=object.pk content_pk=content.pk %}"><span class="fa fa-pen"></span></a>
+    {% endif %}
+{% endif %}

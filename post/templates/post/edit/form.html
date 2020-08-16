@@ -1,0 +1,42 @@
+{% if user.is_authenticated %}
+    <form method="POST">{% csrf_token %}
+        <h1>Beitrag {{ object.title }} bearbeiten</h1>
+
+        <div class="text-right">
+            <p>
+                <a style="text-decoration: none;color:#fff;" href="{% url 'blog:post-detail' title=object.title_slugified %}">Zurück zum Beitrag</a>
+            </p>
+        </div>
+        {% if form.non_field_errors %}
+            {{ form.non_field_errors }}
+        {% endif %}
+        <h1>{{ form.title }}</h1>
+        {% if form.title.errors %}
+          {{ form.title.errors }}
+        {% endif %}
+        <h2 class="subheading">{{ form.sub_title|default:"" }}</h2>
+        {% if form.sub_title.errors %}
+          {{ form.sub_title.errors }}
+        {% endif %}
+        <span class="meta">Posted by
+          {{ form.author }}
+          {% if form.author.errors %}
+              <p>{{ form.author.errors }}</p>
+          {% endif %}
+          on {{ object.created_datetime }}</span>
+        <br/>
+        <div class="card" style="color:#000;">
+            <div class="card-body">
+                <p>{{ form.published.label_tag }}{{ form.published }}</p>
+                {% if form.published.errors %}
+                    <p>{{ form.published.errors }}</p>
+                {% endif %}
+                <p>{{ form.post_image.label_tag }}{{ form.post_image }}</p>
+                {% if form.post_image.errors %}
+                    <p>{{ form.post_image.errors }}</p>
+                {% endif %}
+                <button type="submit" class="btn btn-primary">Änderungen speichern</button>
+            </div>
+        </div>
+    </form>
+{% endif %}

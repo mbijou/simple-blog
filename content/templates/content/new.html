@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+
+
+
+{% block page_header_background %}
+    {% if post_instance.post_image %}
+        {{ post_instance.post_image.url }}
+    {% endif %}
+{% endblock %}
+
+
+
+
+{% block page_header_heading %}
+    {% include 'blog/detail/post_heading.html' with post=post_instance %}
+{% endblock %}
+
+
+{% block content %}
+      <!-- Post Content -->
+      <article>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                {% for content in post_instance.content_set.all %}
+                        {% include 'blog/detail/content_block.html' with content=content object=post_instance edit=True %}
+                {% endfor %}
+
+                {% include "content/new/form.html" %}
+
+                <div class="text-right">
+                    <form method="POST" action="{% url 'post:delete' pk=post_instance.pk %}">{% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Beitrag löschen</button>
+                    </form>
+                </div>
+            </div>
+          </div>
+        </div>
+      </article>
+{% endblock %}

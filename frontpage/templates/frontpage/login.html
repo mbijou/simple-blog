@@ -1,0 +1,31 @@
+{% extends 'frontpage/base.html' %}
+{% load static %}
+
+{% block navigation %}
+    {% include 'frontpage/login/menu.html' %}
+{% endblock %}
+
+
+{% block content %}
+    <section class="page-section portfolio">
+        <div class="container">
+            <!-- Login Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Login</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-user"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Login Grid Items-->
+            <div class="row">
+                <!-- Portfolio Item 1-->
+                <div class="col-md-12 col-lg-12 mb-12">
+                    <div class="portfolio-item mx-auto">
+                       {% include 'registration/login/form.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

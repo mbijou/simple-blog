@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block page_header_heading %}
+    {% include 'post/new/post_heading.html' with post=object %}
+{% endblock %}
+
+
+
+{% block content %}
+        <div class="row">
+            <div class="col-lg-6 col-md-6 mx-auto">
+                {% include 'post/new/form.html' %}
+            </div>
+        </div>
+{% endblock %}
