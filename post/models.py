@@ -27,7 +27,7 @@ default_choice = "PARAGRAPH"
 image_choice = "IMAGE"
 
 type_choices = ((default_choice, "Paragraph"), ("SUBTITLE", "Subtitle"), (image_choice, "Image"),
-                ("BLOCKQUOTE", "Blockquote"),)
+                ("BLOCKQUOTE", "Blockquote"), ("CODE", "Code"),)
 
 
 class Content(models.Model):

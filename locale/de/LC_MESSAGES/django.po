@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-18 22:04+0000\n"
+"POT-Creation-Date: 2020-08-21 15:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,117 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: account/templates/registration/login/form.html:3
-msgid "This is a translation test yes"
-msgstr "Das ist ein Übersetungstext"
-
-#: account/templates/registration/login/form.html:4
-msgid "Another one"
+#: blog/settings.py:134
+msgid "English"
 msgstr ""
+
+#: blog/settings.py:135
+msgid "German"
+msgstr ""
+
+#: blog/templates/blog/base/menu.html:18
+#: frontpage/templates/frontpage/index/menu.html:6
+msgid "About"
+msgstr "Über mich"
+
+#: blog/templates/blog/base/menu.html:21
+#: frontpage/templates/frontpage/index/menu.html:7
+msgid "Contact"
+msgstr "Kontakt"
+
+#: blog/templates/blog/blog.html:10
+msgid "Stories about my Software Development Journey"
+msgstr "Geschichten über meine Softwareentwicklungsreise"
+
+#: blog/templates/blog/blog.html:19
+msgid "New Post"
+msgstr "Neuer Beitrag"
+
+#: blog/templates/blog/blog.html:34
+#: blog/templates/blog/detail/post_heading.html:17
+#: post/templates/post/edit/form.html:23
+msgid "Posted by"
+msgstr "Verfasst von"
+
+#: blog/templates/blog/blog.html:36
+#: blog/templates/blog/detail/post_heading.html:19
+#: post/templates/post/edit/form.html:28
+msgid "on"
+msgstr "am"
+
+#: blog/templates/blog/blog.html:39
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: blog/templates/blog/detail/post_heading.html:9
+#: post/templates/post/edit/form.html:5
+msgid "Edit Post"
+msgstr "Beitrag bearbeiten"
+
+#: content/templates/content/edit.html:30
+msgid "Delete Content"
+msgstr "Inhalt löschen"
+
+#: content/templates/content/edit/form.html:5
+#: post/templates/post/edit/form.html:40
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+#: content/templates/content/new/form.html:6 post/templates/post/edit.html:38
+msgid "Add New Content"
+msgstr "Neuen Inhalt hinzufügen"
+
+#: frontpage/templates/frontpage/base.html:66
+msgid "Computer Science Student"
+msgstr "Informatikstudent"
+
+#: frontpage/templates/frontpage/base.html:66
+msgid "Software Developer"
+msgstr "Softwareentwickler"
+
+#: frontpage/templates/frontpage/index.html:20
+msgid "Contact Me"
+msgstr "Kontaktiere mich"
+
+#: frontpage/templates/frontpage/index.html:62
+msgid "Send"
+msgstr "Absenden"
+
+#: frontpage/templates/frontpage/index/about.html:15
+msgid ""
+"My name is Mimoun Bijjou, I am from Germany and study computer science and I "
+"am very enthusiastic about it and always try to acquire and apply new "
+"knowledge, especially in the area of ​​software development."
+msgstr ""
+"Mein Name ist Mimoun Bijjou, ich komme aus Deutschland und studiere "
+"Informatik und ich bin sehr begeistert davon und versuche immer, neues "
+"Wissen zu erwerben und anzuwenden, insbesondere im Bereich der "
+"Softwareentwicklung."
+
+#: frontpage/templates/frontpage/index/about.html:16
+msgid ""
+"Check out my blog for posts about all the experiences I made and all the "
+"knowledge I gained during my studies and software development career."
+msgstr ""
+"In meinem Blog findest du Beiträge zu allen Erfahrungen, die ich gemacht "
+"habe, und Kenntnisse, die ich während meines Studiums und meiner Karriere "
+"als Softwareentwickler sammeln konnte."
+
+#: frontpage/templates/frontpage/index/portfolio.html:30
+msgid ""
+"A simple blog which can be used for posting, managing and publishing "
+"articles. The blog was developed using the Django web framework."
+msgstr ""
+"Ein einfacher Blog, das zum Veröffentlichen und Verwalten von Artikeln "
+"verwendet werden kann. Der Blog wurde mit dem Django-Webframework entwickelt."
+
+#: post/templates/post/edit.html:45
+msgid "Delete Post"
+msgstr "Beitrag löschen"
+
+#: post/templates/post/edit/form.html:9
+msgid "Back to Post"
+msgstr "Zurück zum Beitrag"
 
 #: venv/lib/python3.7/site-packages/django/contrib/messages/apps.py:7
 msgid "Messages"
@@ -1197,3 +1301,9 @@ msgstr ""
 #: venv/lib/python3.7/site-packages/django/views/templates/default_urlconf.html:409
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "This is a translation test yes"
+#~ msgstr "Das ist ein Übersetungstext"
+
+#~ msgid "was geht"
+#~ msgstr "whats up"

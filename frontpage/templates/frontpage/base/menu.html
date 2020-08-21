@@ -22,6 +22,10 @@
                     <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'frontpage:login' %}">Login <span class="fa fa-user"></span></a>
                   </li>
                 {% endif %}
+                <li class="nav-item mx-0 mx-lg-1">
+                    {% include 'blog/base/menu/choose_language.html' %}
+                </li>
+
             </ul>
         </div>
     </div>

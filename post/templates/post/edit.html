@@ -1,5 +1,5 @@
 {% extends 'blog/base.html' %}
-
+{% load i18n %}
 
 
 {% block page_header_background %}
@@ -35,14 +35,14 @@
                 {% if user.is_authenticated %}
                     <hr/>
 
-                    <p>Neuen Inhalt hinzufügen</p>
+                    <p>{% trans 'Add New Content' %}</p>
 
                     {% include "content/new/form.html" with post_instance=object %}
 
 
                     <div class="text-right">
                         <form method="POST" action="{% url 'post:delete' pk=object.pk %}">{% csrf_token %}
-                            <button type="submit" class="btn btn-danger">Beitrag löschen</button>
+                            <button type="submit" class="btn btn-danger">{% trans 'Delete Post'  %}</button>
                         </form>
                     </div>
                 {% endif %}

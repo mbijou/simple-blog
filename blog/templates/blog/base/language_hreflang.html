@@ -1,0 +1,6 @@
+{% for language_code, language_name, language_url in languages %}
+<link
+    rel="alternate"
+    hreflang="{{ language_code }}"
+    href="{{ language_url }}" />
+{% endfor %}

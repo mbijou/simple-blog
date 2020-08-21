@@ -1,10 +1,12 @@
+{% load i18n %}
+
 <div class="post-heading">
     <h1>{{ post.title }}</h1>
     {% if user.is_authenticated %}
         <div class="text-right">
            <p>
                 <a style="text-decoration: none;color:#fff;" href="{% url 'post:edit' pk=post.pk %}">
-                    Beitrag bearbeiten&nbsp; <span class="fa fa-pen"></span>
+                    {% trans 'Edit Post' %}&nbsp; <span class="fa fa-pen"></span>
                 </a>
            </p>
         </div>
@@ -12,7 +14,7 @@
     {% if post.sub_title %}
         <h2 class="subheading">{{ post.sub_title|default:"" }}</h2>
     {% endif %}
-    <span class="meta">Posted by
+    <span class="meta">{% trans 'Posted by' %}
       <a href="#">{{ post.author }}</a>
-      on {{ post.created_datetime }}</span>
+      {% trans 'on' %} {{ post.created_datetime }}</span>
 </div>

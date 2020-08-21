@@ -1,10 +1,12 @@
+{% load i18n %}
+
 {% if user.is_authenticated %}
-    <form method="POST">{% csrf_token %}
-        <h1>Beitrag {{ object.title }} bearbeiten</h1>
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <h1>{% trans 'Edit Post' %}</h1>
 
         <div class="text-right">
             <p>
-                <a style="text-decoration: none;color:#fff;" href="{% url 'blog:post-detail' title=object.title_slugified %}">Zurück zum Beitrag</a>
+                <a style="text-decoration: none;color:#fff;" href="{% url 'blog:post-detail' title=object.title_slugified %}">{% trans 'Back to Post' %}</a>
             </p>
         </div>
         {% if form.non_field_errors %}
@@ -18,12 +20,12 @@
         {% if form.sub_title.errors %}
           {{ form.sub_title.errors }}
         {% endif %}
-        <span class="meta">Posted by
+        <span class="meta">{% trans 'Posted by' %}
           {{ form.author }}
           {% if form.author.errors %}
               <p>{{ form.author.errors }}</p>
           {% endif %}
-          on {{ object.created_datetime }}</span>
+          {% trans 'on' %} {{ object.created_datetime }}</span>
         <br/>
         <div class="card" style="color:#000;">
             <div class="card-body">
@@ -35,7 +37,7 @@
                 {% if form.post_image.errors %}
                     <p>{{ form.post_image.errors }}</p>
                 {% endif %}
-                <button type="submit" class="btn btn-primary">Änderungen speichern</button>
+                <button type="submit" class="btn btn-primary">{% trans 'Save Changes' %}</button>
             </div>
         </div>
     </form>

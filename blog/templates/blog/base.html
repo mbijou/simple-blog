@@ -1,6 +1,8 @@
 {% load static %}
+{% load i18n %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
 
@@ -67,6 +69,8 @@
             </div>
           </div>
         </div>
+
+        {% include 'blog/base/language_hreflang.html' %}
       </header>
   {% endblock %}
 

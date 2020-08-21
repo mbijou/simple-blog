@@ -9,4 +9,7 @@
             <img class="img-fluid" src="{{ content.image.image_file.url }}" alt="">
     {% endif %}
     <span class="caption text-muted">{{ content.content }} {% include 'blog/detail/content_edit.html' %}</span>
+{% elif content.type == "CODE" %}
+    <pre><code>{{ content.content }}</code></pre>
+    <span class="caption text-muted"> {% include 'blog/detail/content_edit.html' %}</span>
 {% endif %}

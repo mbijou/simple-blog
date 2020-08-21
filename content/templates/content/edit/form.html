@@ -1,5 +1,6 @@
+{% load i18n %}
 <form method="POST" id="content_edit_form" enctype="multipart/form-data">{% csrf_token %}
     {{ content_form.as_p }}
     {{ image_form.as_p }}
-    <button type="submit" class="btn btn-primary">Änderungen Speichern</button>
+    <button type="submit" class="btn btn-primary">{% trans 'Save Changes' %}</button>
 </form>

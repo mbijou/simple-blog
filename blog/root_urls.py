@@ -20,10 +20,10 @@ from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 
 
-# urlpatterns = [path('i18n/', include('django.conf.urls.i18n')),]
+urlpatterns = [path('i18n/', include('django.conf.urls.i18n'))]
 
 
-urlpatterns = i18n_patterns(
+urlpatterns += i18n_patterns(
      path('admin/', admin.site.urls),
      path('blog/administration/', include(('post.urls', "post"), namespace="post")),
      path('blog/administration/', include(('content.urls', "content"), namespace="content")),

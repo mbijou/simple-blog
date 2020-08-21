@@ -1,5 +1,5 @@
 {% extends 'frontpage/base.html' %}
-
+{% load i18n %}
 
 {% block navigation %}
     {% include 'frontpage/index/menu.html' %}
@@ -11,35 +11,13 @@
     {% include 'frontpage/index/portfolio.html' %}
 
     <!-- About Section-->
-    <section class="page-section bg-primary text-white mb-0" id="about">
-        <div class="container">
-            <!-- About Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- About Section Content-->
-            <div class="row">
-                <div class="col-lg-4 ml-auto"><p class="lead">My name is Mimoun Bijjou, I am from Germany and study computer science and I am very enthusiastic about it and always try to acquire and apply new knowledge, especially in the area of ​​software development.</p></div>
-                <div class="col-lg-4 mr-auto"><p class="lead">Check out my blog for posts about all the experiences I made and all the knowledge I gained during my studies and software development career.</p></div>
-            </div>
-            <!-- About Section Button-->
-            <div class="text-center mt-4">
-                <a class="btn btn-xl btn-outline-light" href="{% url 'blog:blog' %}">
-                    <i class="fas fa-blog mr-2"></i>
-                    Blog
-                </a>
-            </div>
-        </div>
-    </section>
+    {% include 'frontpage/index/about.html' %}
+
     <!-- Contact Section-->
     <section class="page-section" id="contact">
         <div class="container">
             <!-- Contact Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">{% trans 'Contact Me' %}</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
@@ -81,7 +59,7 @@
                         </div>
                         <br />
                         <div id="success"></div>
-                        <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Send</button></div>
+                        <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">{% trans 'Send' %}</button></div>
                     </form>
                 </div>
             </div>
