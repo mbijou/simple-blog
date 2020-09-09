@@ -7,10 +7,10 @@ from post.models import Post
 
 
 class PostDeleteView(LoginRequiredMixin, View):
-    def post(self, request, pk=None):
-        self.delete(pk)
+    def post(self, request, title=None):
+        self.delete(title)
         return HttpResponseRedirect(reverse_lazy("post:new"))
 
-    def delete(self, pk):
-        instance = get_object_or_404(Post, pk=pk)
+    def delete(self, title):
+        instance = get_object_or_404(Post.objects_from_local_language, slug_title=title)
         instance.delete()

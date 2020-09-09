@@ -1,0 +1,25 @@
+{% load i18n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<div class="post-heading">
+    <h1>{% trans 'The Post is not available in this Language' %}</h1>
+    {% if title %}
+        <h2 class="subheading">{% trans 'Original Title' %}: {{ title|default:"" }}
+            {% with 'famfamfam-flag-icons/png/'|add:post_language|add:'.png' as image_static %}
+                <img alt="{{ post_language }}" src=" {% static image_static %}"/>
+            {% endwith %}
+        </h2>
+        <div class="text-center">
+            {% with 'famfamfam-flag-icons/png/'|add:post_language|add:'.png' as image_static %}
+                <img alt="{{ post_language }}" src=" {% static image_static %}" class="img-responsive" style="min-height:15px;"/>
+            {% endwith %}
+            <span class="fas fa-arrow-right"></span>
+            {% with 'famfamfam-flag-icons/png/'|add:LANGUAGE_CODE|add:'.png' as image_static %}
+                <img alt="{{ LANGUAGE_CODE }}" src=" {% static image_static %}" class="img-responsive" style="min-height:15px;"/>
+            {% endwith %}
+            &nbsp;<a href="{% url 'post:new-variant' title=title %}" class="btn btn-primary btn-sm" style="padding: .25rem .5rem;font-size: .875rem;line-height: 1.5;border-radius: .2rem;">Übersetzen</a>
+        </div>
+
+    {% endif %}
+</div>

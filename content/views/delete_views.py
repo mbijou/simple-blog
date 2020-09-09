@@ -10,13 +10,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ContentDeleteView(LoginRequiredMixin, View):
     @atomic
-    def post(self, request, pk=None, content_pk=None):
-        self.delete(content_pk, pk)
-        return HttpResponseRedirect(reverse_lazy("post:edit", kwargs={"pk": pk}))
+    def post(self, request, title=None, content_pk=None):
+        self.delete(content_pk, title)
+        return HttpResponseRedirect(reverse_lazy("post:edit", kwargs={"title": title}))
 
-    def delete(self, content_pk, post_pk):
+    def delete(self, content_pk, post_title):
         instance = get_object_or_404(Content, pk=content_pk)
         sequence = instance.sequence
-        contents_of_higher_sequence = Content.objects.filter(post__pk=post_pk, sequence__gt=sequence)
+        contents_of_higher_sequence = Content.objects.filter(post__slug_title=post_title, sequence__gt=sequence)
         instance.delete()
         contents_of_higher_sequence.update(sequence=F("sequence")-1)

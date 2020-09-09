@@ -1,12 +1,30 @@
 {% extends 'blog/base.html' %}
+{% load static %}
 
 {% block page_header_heading %}
     {% include 'post/new/post_heading.html' with post=object %}
 {% endblock %}
 
+{% block page_header_background %}
+    {% if post_to_be_translated %}
+        {% if post_to_be_translated.post_image %}
+            {{ post_to_be_translated.post_image.url }}
+        {% endif %}
+    {% else %}
+        {% static 'clean-blog/img/home-bg.jpg' %}
+    {% endif %}
+
+{% endblock %}
 
 
 {% block content %}
+        <div class="row">
+            <div class="col-lg-6 col-md-6 mx-auto">
+                <div class="text-right">
+                    <a href="{% url 'post:import' %}" class="btn btn-warning">Import JSON</a>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 mx-auto">
                 {% include 'post/new/form.html' %}

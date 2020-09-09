@@ -1,7 +1,9 @@
 {% load i18n %}
 
-<form method="POST" action="{% url 'content:new' pk=post_instance.pk %}" enctype="multipart/form-data">{% csrf_token %}
-    {{ content_form.as_p }}
-    {{ image_form.as_p }}
-    <button type="submit" class="btn btn-primary">{% trans 'Add New Content' %}</button>
-</form>
+{% if post_instance %}
+    <form method="POST" action="{% url 'content:new' title=post_instance.slug_title %}" enctype="multipart/form-data">{% csrf_token %}
+        {{ content_form.as_p }}
+        {{ image_form.as_p }}
+        <button type="submit" class="btn btn-primary">{% trans 'Add New Content' %}</button>
+    </form>
+{% endif %}

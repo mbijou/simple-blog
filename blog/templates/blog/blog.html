@@ -36,7 +36,7 @@
                 {% trans 'on' %} {{ post.created_datetime|default:"Unknown" }}</p>
                 <div class="text-right" >
                     {% if user.is_authenticated %}
-                        <a href="{% url 'post:edit' pk=post.pk %}">{% trans 'Edit' %}</a>
+                        <a href="{% url 'post:edit' title=post.slug_title %}">{% trans 'Edit' %}</a>
                     {% endif %}
                 </div>
             </div>

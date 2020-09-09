@@ -5,7 +5,7 @@
     {% if user.is_authenticated %}
         <div class="text-right">
            <p>
-                <a style="text-decoration: none;color:#fff;" href="{% url 'post:edit' pk=post.pk %}">
+                <a style="text-decoration: none;color:#fff;" href="{% url 'post:edit' title=post.slug_title %}">
                     {% trans 'Edit Post' %}&nbsp; <span class="fa fa-pen"></span>
                 </a>
            </p>

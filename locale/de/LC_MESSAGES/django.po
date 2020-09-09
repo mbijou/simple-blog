@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-21 15:40+0000\n"
+"POT-Creation-Date: 2020-09-08 11:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,18 +40,18 @@ msgstr "Kontakt"
 msgid "Stories about my Software Development Journey"
 msgstr "Geschichten über meine Softwareentwicklungsreise"
 
-#: blog/templates/blog/blog.html:19
+#: blog/templates/blog/blog.html:19 post/templates/post/import.html:20
 msgid "New Post"
 msgstr "Neuer Beitrag"
 
 #: blog/templates/blog/blog.html:34
-#: blog/templates/blog/detail/post_heading.html:17
+#: blog/templates/blog/detail/with_pk/post_heading.html:17
 #: post/templates/post/edit/form.html:23
 msgid "Posted by"
 msgstr "Verfasst von"
 
 #: blog/templates/blog/blog.html:36
-#: blog/templates/blog/detail/post_heading.html:19
+#: blog/templates/blog/detail/with_pk/post_heading.html:19
 #: post/templates/post/edit/form.html:28
 msgid "on"
 msgstr "am"
@@ -60,10 +60,19 @@ msgstr "am"
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: blog/templates/blog/detail/post_heading.html:9
+#: blog/templates/blog/detail/with_pk/post_heading.html:9
 #: post/templates/post/edit/form.html:5
 msgid "Edit Post"
 msgstr "Beitrag bearbeiten"
+
+#: blog/templates/blog/detail/without_pk/post_heading.html:6
+msgid "The Post is not available in this Language"
+msgstr "Der Post ist in dieser Sprache nicht verfügbar"
+
+#: blog/templates/blog/detail/without_pk/post_heading.html:8
+#: post/templates/post/new/post_heading.html:10
+msgid "Original Title"
+msgstr "Originaltitel"
 
 #: content/templates/content/edit.html:30
 msgid "Delete Content"
@@ -74,7 +83,7 @@ msgstr "Inhalt löschen"
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: content/templates/content/new/form.html:6 post/templates/post/edit.html:38
+#: content/templates/content/new/form.html:7 post/templates/post/edit.html:46
 msgid "Add New Content"
 msgstr "Neuen Inhalt hinzufügen"
 
@@ -122,13 +131,33 @@ msgstr ""
 "Ein einfacher Blog, das zum Veröffentlichen und Verwalten von Artikeln "
 "verwendet werden kann. Der Blog wurde mit dem Django-Webframework entwickelt."
 
-#: post/templates/post/edit.html:45
+#: post/forms.py:14
+msgid "Import File"
+msgstr "Datei importieren"
+
+#: post/templates/post/edit.html:53
 msgid "Delete Post"
 msgstr "Beitrag löschen"
 
 #: post/templates/post/edit/form.html:9
 msgid "Back to Post"
 msgstr "Zurück zum Beitrag"
+
+#: post/templates/post/import.html:7
+msgid "Import existing post from locale computer"
+msgstr "Importieren Sie vorhandene Beiträge vom lokalen Rechner"
+
+#: post/templates/post/import.html:28
+msgid "Save"
+msgstr "Speichern"
+
+#: post/templates/post/new/error_translate.html:8
+msgid "Post already existing in that language"
+msgstr "Beitrag bereits in dieser Sprache vorhanden"
+
+#: post/templates/post/new/post_heading.html:6
+msgid "Create new Post"
+msgstr "Neuen Beitrag erstellen"
 
 #: venv/lib/python3.7/site-packages/django/contrib/messages/apps.py:7
 msgid "Messages"
@@ -1301,9 +1330,3 @@ msgstr ""
 #: venv/lib/python3.7/site-packages/django/views/templates/default_urlconf.html:409
 msgid "Connect, get help, or contribute"
 msgstr ""
-
-#~ msgid "This is a translation test yes"
-#~ msgstr "Das ist ein Übersetungstext"
-
-#~ msgid "was geht"
-#~ msgstr "whats up"

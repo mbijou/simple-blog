@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block page_header_heading %}
+    <div class="post-heading">
+        <h1>{% trans 'Post already existing in that language' %}</h1>
+
+        {% if post_to_be_translated %}
+            <h2 class="subheading">
+                {% if existing_post %}
+                    <a href="{% url 'blog:post-detail' title=existing_post.slug_title %}" style="color:white;">{{ existing_post.title}}</a>
+                    {% with 'famfamfam-flag-icons/png/'|add:existing_post.language_code|add:'.png' as image_static %}
+                        <img alt="{{ existing_post.language_code }}" src=" {% static image_static %}"/>
+                    {% endwith %}
+                {% endif %}
+            </h2>
+            <div class="text-center">
+                {% with 'famfamfam-flag-icons/png/'|add:post_to_be_translated.language_code|add:'.png' as image_static %}
+                    <img alt="{{ post_to_be_translated.language_code }}" src=" {% static image_static %}" class="img-responsive" style="min-height:15px;"/>
+                {% endwith %}
+
+                <span class="fas fa-arrow-right"></span>
+
+                {% get_current_language as LANGUAGE_CODE %}
+
+                {% with 'famfamfam-flag-icons/png/'|add:LANGUAGE_CODE|add:'.png' as image_static %}
+                    <img alt="{{ LANGUAGE_CODE }}" src=" {% static image_static %}" class="img-responsive" style="min-height:15px;"/>
+                {% endwith %}
+            </div>
+        {% endif %}
+    </div>
+
+
+{% endblock %}
+
+{% block page_header_background %}
+    {% if post_to_be_translated %}
+        {% if post_to_be_translated.post_image %}
+            {{ post_to_be_translated.post_image.url }}
+        {% endif %}
+    {% else %}
+        {% static 'clean-blog/img/home-bg.jpg' %}
+    {% endif %}
+
+{% endblock %}
+
+
+{% block content %}
+
+{% endblock %}

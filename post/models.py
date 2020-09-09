@@ -1,7 +1,19 @@
 from django.db import models
 from django.utils.text import slugify
+from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.utils import translation
 User = get_user_model()
+
+
+class LocalLanguagePostManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(language_code=translation.get_language())
+
+
+class MultiLanguagePostManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset()
 
 
 class Post(models.Model):
@@ -11,16 +23,31 @@ class Post(models.Model):
     published = models.BooleanField(default=False)
     created_datetime = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     post_image = models.ImageField(null=True, blank=True)
-    slug_title = models.SlugField(max_length=200, null=True)
+    slug_title = models.SlugField(max_length=200, null=True, unique=True)
+    language_code = models.CharField(null=False, blank=False, default=translation.get_language(), max_length=200)
+    language_group = models.ForeignKey("post.LanguageGroup", null=True, on_delete=models.SET_NULL)
+
+    objects = MultiLanguagePostManager()
+
+    objects_from_all_languages = MultiLanguagePostManager()
+
+    objects_from_local_language = LocalLanguagePostManager()
 
     def title_slugified(self):
         return slugify(self.title)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        if self.pk is None:
+            self.language_code = translation.get_language()
+
         self.slug_title = slugify(self.title)
         return super().save(force_insert=force_insert, force_update=force_update, using=using,
                             update_fields=update_fields)
+
+
+class LanguageGroup(models.Model):
+    pass
 
 
 default_choice = "PARAGRAPH"

@@ -12,7 +12,7 @@
 
 
 {% block page_header_heading %}
-    {% include 'blog/detail/post_heading.html' with post=post_instance %}
+    {% include 'blog/detail/with_pk/post_heading.html' with post=post_instance %}
 {% endblock %}
 
 
@@ -26,7 +26,7 @@
                     {% if content.pk == content_pk %}
                         {% include 'content/edit/form.html' %}
                         <div class="text-right">
-                            <form method="POST" action="{% url 'content:delete' pk=post_instance.pk content_pk=content.pk %}">{% csrf_token %}
+                            <form method="POST" action="{% url 'content:delete' title=post_instance.slug_title content_pk=content.pk %}">{% csrf_token %}
                                 <button type="submit" class="btn btn-danger">{% trans 'Delete Content' %}</button>
                             </form>
                         </div>

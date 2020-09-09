@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block page_header_heading %}
+    <div class="post-heading">
+        <h1>{% trans 'Import existing post from locale computer' %}</h1>
+    </div>
+{% endblock %}
+
+{% block page_header_background %}
+    {% static 'clean-blog/img/home-bg.jpg' %}
+{% endblock %}
+
+
+{% block content %}
+        <div class="row">
+            <div class="col-lg-6 col-md-6 mx-auto">
+                <div class="text-right">
+                    <a href="{% url 'post:new' %}" class="btn btn-warning">{% trans 'New Post' %}</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 mx-auto">
+                {% for field, error_msg in post_form.errors.items %}
+                    {{ error_msg }}
+                {% endfor %}
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+                </form>
+            </div>
+        </div>
+{% endblock %}

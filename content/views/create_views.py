@@ -17,11 +17,12 @@ class ContentCreateView(LoginRequiredMixin, View):
     post_form = None
     content_form = None
     image_form = None
+
     post_instance = None
     content_instance = None
 
     @transaction.atomic
-    def post(self, request, pk=None):
+    def post(self, request, title=None):
         error_page = self.get_render(request)
 
         if self.content_form.is_valid() is True:
@@ -32,12 +33,12 @@ class ContentCreateView(LoginRequiredMixin, View):
             if transaction.get_rollback() is True:
                 return error_page
 
-            return HttpResponseRedirect(reverse_lazy("post:edit", kwargs={"pk": pk}))
+            return HttpResponseRedirect(reverse_lazy("post:edit", kwargs={"title": self.post_instance.slug_title}))
         else:
             return error_page
 
     def get_context(self, request):
-        self.post_instance = self.get_instance(Post, self.kwargs.get("pk"))
+        self.post_instance = get_object_or_404(Post.objects_from_local_language, slug_title=self.kwargs.get("title"))
         self.post_form = PostForm(instance=self.post_instance)
         self.image_form = self.get_form(request, ImageForm, None)
         self.content_form = self.get_form(request, ContentForm, None)
@@ -46,20 +47,13 @@ class ContentCreateView(LoginRequiredMixin, View):
         return context
 
     def get_form(self, request, form_class, instance):
-        print(request.FILES)
         if self.request.POST and self.request.FILES:
             form = form_class(request.POST, files=self.request.FILES, instance=instance)
         elif self.request.POST:
-            print(f"baaaaaa ???????")
             form = form_class(request.POST, instance=instance)
         else:
             form = form_class(instance=instance)
         return form
 
     def get_render(self, request):
-        print("!!!")
         return render(request, template_name="content/new.html", context=self.get_context(request))
-
-    def get_instance(self, instance_class, pk):
-        print(f"hey")
-        return get_object_or_404(instance_class, pk=pk)

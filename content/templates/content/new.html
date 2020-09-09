@@ -12,7 +12,7 @@
 
 
 {% block page_header_heading %}
-    {% include 'blog/detail/post_heading.html' with post=post_instance %}
+    {% include 'blog/detail/with_pk/post_heading.html' with post=post_instance %}
 {% endblock %}
 
 
@@ -29,7 +29,7 @@
                 {% include "content/new/form.html" %}
 
                 <div class="text-right">
-                    <form method="POST" action="{% url 'post:delete' pk=post_instance.pk %}">{% csrf_token %}
+                    <form method="POST" action="{% url 'post:delete' title=post_instance.slug_title %}">{% csrf_token %}
                         <button type="submit" class="btn btn-danger">Beitrag löschen</button>
                     </form>
                 </div>

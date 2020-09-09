@@ -3,19 +3,37 @@
 
 
 {% block page_header_heading %}
-    {% include 'blog/detail/post_heading.html' %}
+    {% if post %}
+        {% include 'blog/detail/with_pk/post_heading.html' %}
+    {% else %}
+        {% include 'blog/detail/without_pk/post_heading.html' %}
+
+    {% endif %}
 {% endblock %}
 
 
 {% block page_header_background %}
-    {% if post.post_image %}
-        {{ post.post_image.url }}
+    {% if post_image %}
+        {{ post_image.url }}
     {% endif %}
 {% endblock %}
 
 {% block content %}
       <!-- Post Content -->
       <article>
+        {% if request.user.is_authenticated %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="text-right">
+                            {% if post %}
+                                <a href="{% url 'blog:post-export' title=post.slug_title %}" class="btn btn-warning">JSON</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <div class="container">
           <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">

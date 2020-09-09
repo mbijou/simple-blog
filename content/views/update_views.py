@@ -15,15 +15,16 @@ class ContentUpdateView(LoginRequiredMixin, View):
     post_form = None
     content_form = None
     image_form = None
+
     post_instance = None
     content_instance = None
     image_instance = None
 
-    def get(self, request, pk=None, content_pk=None):
+    def get(self, request, title=None, content_pk=None):
         return self.get_render(request)
 
     @transaction.atomic
-    def post(self, request, pk=None, content_pk=None):
+    def post(self, request, title=None, content_pk=None):
         error_page = self.get_render(request)
 
         if self.content_form.is_valid() is True:
@@ -36,15 +37,16 @@ class ContentUpdateView(LoginRequiredMixin, View):
 
             # last_url used for next page for javascript to scroll to the a tag that has that last_url
             last_url = str(reverse_lazy("content:edit",
-                                        kwargs={"pk": self.post_instance.pk, "content_pk": self.content_instance.pk}))
+                                        kwargs={"title": self.post_instance.slug_title,
+                                                "content_pk": self.content_instance.pk}))
 
             return HttpResponseRedirect(
-                reverse_lazy("post:edit", kwargs={"pk": pk}) + f"?last=" + last_url)
+                reverse_lazy("post:edit", kwargs={"title": self.post_instance.slug_title}) + f"?last=" + last_url)
         else:
             return error_page
 
     def get_context(self, request):
-        self.post_instance = self.get_instance(Post, self.kwargs.get("pk"))
+        self.post_instance = get_object_or_404(Post.objects_from_local_language, slug_title=self.kwargs.get("title"))
         self.content_instance = self.get_instance(Content, self.kwargs.get("content_pk"))
         if self.content_instance:
             self.image_instance = self.content_instance.get_image()
@@ -67,7 +69,6 @@ class ContentUpdateView(LoginRequiredMixin, View):
         return form
 
     def get_render(self, request):
-        print("!!!")
         return render(request, template_name="content/edit.html", context=self.get_context(request))
 
     def get_instance(self, instance_class, pk):

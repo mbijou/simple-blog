@@ -1,3 +1,25 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
 <div class="post-heading">
-    <h1>Neuen Beitrag erstellen</h1>
+    <h1>{% trans 'Create new Post' %}</h1>
+
+    {% if post_to_be_translated %}
+        <h2 class="subheading">
+            {% trans 'Original Title' %}: {{ post_to_be_translated.title}}
+            {% with 'famfamfam-flag-icons/png/'|add:post_to_be_translated.language_code|add:'.png' as image_static %}
+                <img alt="{{ post_to_be_translated.language_code }}" src=" {% static image_static %}"/>
+            {% endwith %}
+        </h2>
+        <div class="text-center">
+            {% with 'famfamfam-flag-icons/png/'|add:post_to_be_translated.language_code|add:'.png' as image_static %}
+                <img alt="{{ post_to_be_translated.language_code }}" src=" {% static image_static %}" class="img-responsive" style="min-height:15px;"/>
+            {% endwith %}
+            <span class="fas fa-arrow-right"></span>
+            {% with 'famfamfam-flag-icons/png/'|add:LANGUAGE_CODE|add:'.png' as image_static %}
+                <img alt="{{ LANGUAGE_CODE }}" src=" {% static image_static %}" class="img-responsive" style="min-height:15px;"/>
+            {% endwith %}
+        </div>
+    {% endif %}
 </div>

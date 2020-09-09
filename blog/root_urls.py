@@ -25,8 +25,8 @@ urlpatterns = [path('i18n/', include('django.conf.urls.i18n'))]
 
 urlpatterns += i18n_patterns(
      path('admin/', admin.site.urls),
-     path('blog/administration/', include(('post.urls', "post"), namespace="post")),
-     path('blog/administration/', include(('content.urls', "content"), namespace="content")),
+     path('blog/', include(('post.urls', "post"), namespace="post")),
+     path('blog/', include(('content.urls', "content"), namespace="content")),
      path('', include(('frontpage.urls', "frontpage"), namespace="frontpage")),
      path('blog/', include(('blog.urls', "blog"), namespace="blog")),
      path('', include(('account.urls', "account"), namespace="account")),

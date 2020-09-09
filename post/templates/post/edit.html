@@ -3,8 +3,8 @@
 
 
 {% block page_header_background %}
-    {% if object.post_image %}
-        {{ object.post_image.url }}
+    {% if post_image %}
+        {{ post_image.url }}
     {% endif %}
 {% endblock %}
 
@@ -14,10 +14,18 @@
 {% block page_header_heading %}
     {% if user.is_authenticated %}
       <div class="post-heading">
-        {% include 'post/edit/form.html' %}
+        {% if object %}
+            {% include 'post/edit/form.html' %}
+        {% else %}
+            {% include 'blog/detail/without_pk/post_heading.html' %}
+        {% endif %}
       </div>
     {% else %}
-        {% include 'blog/detail/post_heading.html' with post=object %}
+        {% if object %}
+            {% include 'blog/detail/with_pk/post_heading.html' with post=object %}
+        {% else %}
+            {% include 'blog/detail/without_pk/post_heading.html' %}
+        {% endif %}
     {% endif %}
 {% endblock %}
 
@@ -39,12 +47,13 @@
 
                     {% include "content/new/form.html" with post_instance=object %}
 
-
-                    <div class="text-right">
-                        <form method="POST" action="{% url 'post:delete' pk=object.pk %}">{% csrf_token %}
-                            <button type="submit" class="btn btn-danger">{% trans 'Delete Post'  %}</button>
-                        </form>
-                    </div>
+                    {% if object %}
+                        <div class="text-right">
+                            <form method="POST" action="{% url 'post:delete' title=object.slug_title %}">{% csrf_token %}
+                                <button type="submit" class="btn btn-danger">{% trans 'Delete Post'  %}</button>
+                            </form>
+                        </div>
+                    {% endif %}
                 {% endif %}
             </div>
           </div>
