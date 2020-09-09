@@ -17,7 +17,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
