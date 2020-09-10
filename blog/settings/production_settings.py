@@ -4,3 +4,5 @@ import django_heroku
 
 DEBUG = False
 django_heroku.settings(locals())
+
+SECURE_SSL_REDIRECT = True
