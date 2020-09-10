@@ -13,8 +13,10 @@ class PostDetailView(View):
         instance = context.get("post")
         language_group = instance.language_group
 
-        if instance.language_code != translation.get_language():
-            redirect_to_other_language = get_redirect_to_other_language(language_group)
+        language_code = instance.language_code
+
+        if language_code != translation.get_language():
+            redirect_to_other_language = get_redirect_to_other_language(language_group, translation.get_language())
 
             if redirect_to_other_language:
                 return redirect_to_other_language
@@ -60,10 +62,10 @@ def get_post_from_all_languages(title):
         raise Http404('No %s matches the given query.' % Post._meta.object_name)
 
 
-def get_redirect_to_other_language(language_group):
+def get_redirect_to_other_language(language_group, language_code):
     if language_group is not None:
         try:
-            language_instance = get_object_or_404(Post, language_group=language_group)
+            language_instance = get_object_or_404(Post, language_group=language_group, language_code=language_code)
             return HttpResponseRedirect(
                 reverse_lazy("blog:post-detail", kwargs={"title": language_instance.slug_title}))
         except Post.DoesNotExist:
