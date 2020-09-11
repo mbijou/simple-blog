@@ -8,7 +8,7 @@ from blog.base_forms import BootstrapForm
 class ContentForm(BootstrapForm, ModelForm):
     class Meta:
         model = Content
-        fields = ("content", "type", )
+        fields = ("content", "type", "sequence", )
 
     def save(self, commit=True, post=None):
         if post is not None:

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import F
 from django.utils.text import slugify
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -58,6 +59,9 @@ type_choices = ((default_choice, "Paragraph"), ("SUBTITLE", "Subtitle"), (image_
 
 
 class Content(models.Model):
+    class Meta:
+        ordering = ("sequence", )
+
     post = models.ForeignKey(Post, null=False, on_delete=models.CASCADE)
     content = models.TextField()
     sequence = models.IntegerField()
@@ -68,19 +72,26 @@ class Content(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-
         contents_count = self.post.content_set.count()
 
         content_created = self.pk is None and self.post and contents_count > 0
+
         first_content_created = self.pk is None and contents_count == 0
 
-        if content_created is True:
-            actual_contents = self.post.content_set.order_by("sequence")
-            if actual_contents.count() == 0:
-                self.sequence = 1
-            elif actual_contents.count() > 0:
-                self.sequence = actual_contents.last().sequence + 1
-        elif first_content_created is True:
+        if first_content_created is True:
             self.sequence = 0
+
+        actual_contents = self.post.content_set.order_by("sequence")
+        contents_count = actual_contents.count()
+
+        print(f"Jo: {self.sequence} - {contents_count}")
+
+        if content_created is True:
+            if contents_count > 0 and self.sequence is None:
+                self.sequence = actual_contents.last().sequence + 1
+        else:
+            if contents_count > 0 and self.sequence is not None and self.sequence < contents_count:
+                actual_contents.filter(sequence__gte=self.sequence).update(sequence=F("sequence") + 1)
+
         return super().save(force_insert=force_insert, force_update=force_update, using=using,
                             update_fields=update_fields)

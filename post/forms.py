@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 class PostForm(BootstrapForm, forms.ModelForm):
     class Meta:
         model = Post
-        fields = ("title", "sub_title", "published", "author", "post_image")
+        fields = ("title", "sub_title", "published", "author", "post_image",)
 
 
 class PostImportForm(BootstrapForm, forms.Form):
