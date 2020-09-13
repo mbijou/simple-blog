@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from content.views.management.manage_image_form import save_image_form
 from post.forms import PostForm
-from content.forms import ContentForm, ImageForm
+from content.forms import ContentUpdateForm, ImageForm
 from post.models import Post, Content
 from django.db import transaction
 from django.shortcuts import get_object_or_404
@@ -53,7 +53,7 @@ class ContentUpdateView(LoginRequiredMixin, View):
             print(self.image_instance)
 
         self.post_form = PostForm(instance=self.post_instance)
-        self.content_form = self.get_form(request, ContentForm, instance=self.content_instance)
+        self.content_form = self.get_form(request, ContentUpdateForm, instance=self.content_instance)
         self.image_form = self.get_form(request, ImageForm, instance=self.image_instance)
         context = {"post_form": self.post_form, "content_form": self.content_form, "post_instance": self.post_instance,
                    "image_form": self.image_form, "content_pk": self.kwargs.get("content_pk")}

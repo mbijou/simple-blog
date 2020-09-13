@@ -6,7 +6,7 @@ from django.views import View
 
 from blog.views.detail_views import get_redirect_to_other_language, get_post_from_all_languages
 from post.forms import PostForm
-from content.forms import ContentForm, ImageForm
+from content.forms import ContentNewForm, ImageForm
 from post.models import Post
 from django.db.transaction import atomic
 from django.shortcuts import get_object_or_404
@@ -53,7 +53,7 @@ class PostUpdateView(LoginRequiredMixin, View):
         post_image = self.get_post_image(self.instance)
 
         self.form = self.get_form(request, PostForm)
-        self.content_form = self.get_form(request, ContentForm)
+        self.content_form = self.get_form(request, ContentNewForm)
         self.image_form = self.get_form(request, ImageForm)
         context = {"form": self.form, "content_form": self.content_form, "image_form": self.image_form,
                    "object": self.instance, "post_language": post_language, "post_image": post_image,

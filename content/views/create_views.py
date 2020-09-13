@@ -6,7 +6,7 @@ from django.views import View
 
 from content.views.management.manage_image_form import save_image_form
 from post.forms import PostForm
-from content.forms import ContentForm, ImageForm
+from content.forms import ContentNewForm, ImageForm
 # Create your views here.
 from post.models import Post
 from django.db import transaction
@@ -41,7 +41,7 @@ class ContentCreateView(LoginRequiredMixin, View):
         self.post_instance = get_object_or_404(Post.objects_from_local_language, slug_title=self.kwargs.get("title"))
         self.post_form = PostForm(instance=self.post_instance)
         self.image_form = self.get_form(request, ImageForm, None)
-        self.content_form = self.get_form(request, ContentForm, None)
+        self.content_form = self.get_form(request, ContentNewForm, None)
         context = {"post_form": self.post_form, "content_form": self.content_form,
                    "image_form": self.image_form, "post_instance": self.post_instance}
         return context

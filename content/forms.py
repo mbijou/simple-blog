@@ -5,7 +5,18 @@ from post.models import image_choice
 from blog.base_forms import BootstrapForm
 
 
-class ContentForm(BootstrapForm, ModelForm):
+class ContentNewForm(BootstrapForm, ModelForm):
+    class Meta:
+        model = Content
+        fields = ("content", "type", )
+
+    def save(self, commit=True, post=None):
+        if post is not None:
+            self.instance.post = post
+        return super().save(commit=commit)
+
+
+class ContentUpdateForm(BootstrapForm, ModelForm):
     class Meta:
         model = Content
         fields = ("content", "type", "sequence", )

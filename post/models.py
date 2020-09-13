@@ -81,6 +81,13 @@ class Content(models.Model):
         if first_content_created is True:
             self.sequence = 0
 
+        if self.pk is not None:
+            old_sequence = Content.objects.get(pk=self.pk).sequence
+
+            if self.sequence == old_sequence:
+                return super().save(force_insert=force_insert, force_update=force_update, using=using,
+                                    update_fields=update_fields)
+
         actual_contents = self.post.content_set.order_by("sequence")
         contents_count = actual_contents.count()
 

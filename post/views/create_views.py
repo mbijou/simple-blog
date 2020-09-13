@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from content.views.management.manage_image_form import save_image_form
 from post.forms import PostForm
-from content.forms import ContentForm, ImageForm
+from content.forms import ContentNewForm, ImageForm
 from post.models import Post, LanguageGroup
 from django.db import transaction
 from django.utils import translation
@@ -59,7 +59,7 @@ class PostCreateView(LoginRequiredMixin, View):
 
     def get_context(self, request):
         self.form = self.get_form(request, PostForm)
-        self.content_form = self.get_form(request, ContentForm)
+        self.content_form = self.get_form(request, ContentNewForm)
         self.image_form = self.get_form(request, ImageForm)
         post_to_be_translated_title = self.kwargs.get("title")
         post_to_be_translated = self.get_post_to_be_translated(post_to_be_translated_title)
