@@ -1,9 +1,9 @@
 {% load i18n %}
 {% load static %}
 
-<form action="{% url 'set_language' %}" id="language_form" method="post">{% csrf_token %}
+<form action="{% url 'set_language' %}" id="language_form" method="post" onchange="this.submit()">{% csrf_token %}
  <input name="next" type="hidden" value="{{ redirect_to }}" />
- <select name="language" class="custom-select" id="inputGroupSelect04" onchange="this.form.submit()">
+ <select name="language" class="custom-select" id="inputGroupSelect04">
     {% get_current_language as LANGUAGE_CODE %}
     {% get_available_languages as LANGUAGES %}
     {% get_language_info_list for LANGUAGES as languages %}
